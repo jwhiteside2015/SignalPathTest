@@ -16,12 +16,20 @@ namespace HexToBase64Converter
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ConvertHexToBase64(HexString.Text);
+            string result = ConvertHexToBase64(HexString.Text);
         }
 
-        private void ConvertHexToBase64(string hexString)
+        private string ConvertHexToBase64(string hexString)
         {
-            
+            // Convert hex string to a byte array so that we can pass it to the ToBase64String method
+            byte[] byteArray = new byte[hexString.Length / 2];
+            for (int i = 0; i < hexString.Length; i++)
+            {
+                byteArray[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+            }
+
+            // Convert the byte array to base64
+            return Convert.ToBase64String(byteArray);
         }
     }
 }
