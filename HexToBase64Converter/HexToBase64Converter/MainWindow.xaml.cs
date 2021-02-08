@@ -4,9 +4,6 @@ using System.Windows.Controls;
 
 namespace HexToBase64Converter
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -16,16 +13,27 @@ namespace HexToBase64Converter
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string result = ConvertHexToBase64(HexString.Text);
+            // Check for an uneven number of characters
+            if (HexString.Text.Length % 2 == 1)
+            {
+                MessageBox.Show("Input string must have an even number of characters", "Alert");
+            }
+            else
+            {
+                string result = ConvertHexToBase64(HexString.Text);
+                ConversionResult conversionResultWindow = new ConversionResult();
+                conversionResultWindow.ResultLabel.Content = result;
+                conversionResultWindow.Show();
+            }
         }
 
         private string ConvertHexToBase64(string hexString)
         {
             // Convert hex string to a byte array so that we can pass it to the ToBase64String method
             byte[] byteArray = new byte[hexString.Length / 2];
-            for (int i = 0; i < hexString.Length; i++)
+            for (int i = 0; i < hexString.Length; i += 2)
             {
-                byteArray[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+                byteArray[i / 2] = Convert.ToByte(hexString.Substring(i, 2), 16);
             }
 
             // Convert the byte array to base64
