@@ -23,3 +23,5 @@
      You can find my solution here: SignalPathTest/HexToBase64Converter/HexToBase64Converter.exe
   
 3. Download this [simple Python script](https://github.com/SignalPath/CodeTests/blob/master/specialMath.py). When you run it from the command line, it takes one parameter. So `$> python specialMath.py 7` will produce `79`. Also, `$> python specialMath.py 17` will produce `10926`. This question has two parts: first, convert it to Scala; second, have the script calculate `$> specialMath 90`.
+
+     You can find my solution here: SignalPathTest/special-math/src/main/scala/Main.scala
